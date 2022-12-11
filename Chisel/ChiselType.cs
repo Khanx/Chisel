@@ -177,19 +177,34 @@ namespace Chisel
             bool left = World.TryGetTypeAt(voxelHit + Vector3Int.left, out type) && type != BlockTypes.BuiltinBlocks.Indices.air;
             bool right = World.TryGetTypeAt(voxelHit + Vector3Int.right, out type) && type != BlockTypes.BuiltinBlocks.Indices.air;
 
-            if (forward && left)    //forward = z+ && left = x-
+
+            //Three adjacent blocks
+            if (forward && left && right)
                 return "z+";
 
-            if (forward && right)    //forward = z+ && right = x+
-                return "x+";
-
-            if (back && left)    //back = z- && left = x-
-                return "x-";
-
-            if (back && right)    //back = z- && right = x+
+            if (back && left && right)
                 return "z-";
 
+            if (forward && left && back)
+                return "x-";
 
+            if (forward && right && back)
+                return "x+";
+
+            //Two adjacent blocks
+            if (forward && left)
+                return "z+";
+
+            if (forward && right)
+                return "x+";
+
+            if (back && left)
+                return "x-";
+
+            if (back && right)
+                return "z-";
+
+            //One adjacent block
             if (forward)
                 return "z+";
 
