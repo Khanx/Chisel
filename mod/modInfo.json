@@ -1,0 +1,38 @@
+[
+	{
+		"name": "Chisel",
+		"version": "0.1.0.0",
+		"description" : "The player will select the shape of the block to place.",
+		"enableddefault" : true,
+		"dllpath": "Chisel.dll",
+		"compatibleversions":
+			[
+				"0.9.0"
+			],
+		"jsonFiles" : [
+			{
+				"relativePath" : "./gamedata/types.json",
+				"fileType" : "addNewTypes",
+				"index" : -1000000
+			},
+			{
+				"relativePath" : "./gamedata/recipes.json",
+				"fileType" : "addOrReplacePlayerRecipes",
+				"index" : -1000000,
+			},
+			{
+				"fileType": "addOrOverrideLocalization",
+				"relativePath": "./gamedata/localization/en-US/en-US.json"
+			},
+			{
+				"fileType": "addOrOverrideLocalization",
+				"relativePath": "./gamedata/localization/es-ES/es-ES.json"
+			},
+			{
+				"fileType": "addScience",
+				"index": -1000000,
+				"relativePath": "./gamedata/science.json"
+			},
+		]
+	}
+]

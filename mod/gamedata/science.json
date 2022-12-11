@@ -1,0 +1,20 @@
+[
+	{
+		"dependencies": [
+			"pipliz.iron"
+		],
+		"icon": "./textures/icons/chisel.png",
+		"itemRequirements": [
+			{
+				"amount": 10,
+				"type": "planks"
+			},
+			{
+				"amount": 20,
+				"type": "irontools"
+			}
+		],
+		"key": "Khanx.Chisel",
+		"unlocksRecipes": ["Khanx.Player.Chisel"]
+	}
+]

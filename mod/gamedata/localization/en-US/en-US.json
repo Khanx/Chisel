@@ -1,0 +1,18 @@
+{
+	"types":
+	{
+		"Khanx.Chisel": "Chisel"
+	},
+	"typeuses":
+	{
+		"Khanx.Chisel": "Right click to select the shape. Left click to carve block. Left click again to rotate block."
+	},
+	"sentences": {
+		"Khanx": {
+			"Chisel": {
+				"description": "Unlocks the Chisel that allows you to change the shape of the blocks.",
+				"name": "Chisel"
+			}
+		}
+	}
+}

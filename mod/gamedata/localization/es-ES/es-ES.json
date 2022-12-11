@@ -1,0 +1,18 @@
+{
+	"types":
+	{
+		"Khanx.Chisel": "Cincel"
+	},
+	"typeuses":
+	{
+		"Khanx.Chisel": "Click derecho para seleccionar la forma. Click izquierdo para tallar bloque. Click izquierdo de nuevo para rotar bloque."
+	},
+	"sentences": {
+		"Khanx": {
+			"Chisel": {
+				"description": "Desbloquea el cincel que te permite cambiar la forma de los bloques.",
+				"name": "Cincel"
+			}
+		}
+	}
+}

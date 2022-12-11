@@ -1,0 +1,14 @@
+[
+	{
+		"defaultLimit" : 0,
+		"defaultPriority" : -100,
+		"name" : "Khanx.Player.Chisel",
+		"requires" : [
+			{"amount":2,"type":"planks"},
+			{"amount":4,"type":"irontools"}
+		],
+		"results" : [
+			{"amount":1, "type":"Khanx.Chisel"}
+		]
+	}
+]
