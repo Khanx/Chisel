@@ -41,6 +41,9 @@ namespace Chisel
                 //Check if Type has shape
                 if (ShapeManager.typeWithShapes.Contains(click.GetVoxelHit().TypeHit))
                 {
+                    if (selectedShape[player.ID] == -1)
+                        return;
+
                     //Replace for selected shape
                     ServerManager.TryChangeBlock(click.GetVoxelHit().BlockHit,
                         ItemTypes.GetType(typeHitName + ShapeManager.shapeName[selectedShape[player.ID]] + getBestRotation(click.GetVoxelHit().BlockHit)),
@@ -74,6 +77,15 @@ namespace Chisel
                     return;
                 }
 
+                if (selectedShape[player.ID] == -1) // Cube shape
+                {
+                    ServerManager.TryChangeBlock(click.GetVoxelHit().BlockHit,
+                                        ItemTypes.GetType(typeHitBase),
+                                        player);
+
+                    return;
+                }
+
                 //Rotate if is the same shape
                 if (ShapeManager.shapeName[selectedShape[player.ID]] == typeHitShape)
                 {
@@ -88,14 +100,14 @@ namespace Chisel
                     }
 
                     ServerManager.TryChangeBlock(click.GetVoxelHit().BlockHit,
-                    ItemTypes.GetType(typeHitBase + typeHitShape + newRotation),
-                    player);
+                        ItemTypes.GetType(typeHitBase + typeHitShape + newRotation),
+                        player);
                 }
                 else    //Change shape
                 {
                     ServerManager.TryChangeBlock(click.GetVoxelHit().BlockHit,
-                    ItemTypes.GetType(typeHitBase + ShapeManager.shapeName[selectedShape[player.ID]] + typeHitRotation),
-                    player);
+                        ItemTypes.GetType(typeHitBase + ShapeManager.shapeName[selectedShape[player.ID]] + typeHitRotation),
+                        player);
                 }
             }
             else if (click.ClickType == EClickType.Right)
@@ -111,6 +123,22 @@ namespace Chisel
                 chiselMenu.LocalStorage.SetAs("header", "Chisel");
                 chiselMenu.Width = width * shapesPerRow + 50;
                 chiselMenu.Height = Math.RoundToInt((float)ShapeManager.shapeName.Count / shapesPerRow) * (64 + 30 + 30 + 5);
+
+                chiselMenu.Items.Add(new HorizontalRow(new List<(IItem, int)>
+                    {
+                        (new EmptySpace(), (int) (width * shapesPerRow * 0.45)),
+                        (new ItemIcon(ShapeManager.baseName + ".Cube"){ ShowTooltip = false}, (int) ( width * shapesPerRow * 0.7)),
+                        (new EmptySpace(), (int) (width * shapesPerRow * 0.45))
+                    }));
+
+                chiselMenu.Items.Add(new HorizontalRow(new List<(IItem, int)>
+                    {
+                        (new EmptySpace(), (int) (width * shapesPerRow * 0.45) - 30),
+                        (new ButtonCallback("Khanx.Chisel.-1", new LabelData("Cube"), -1, 30, ButtonCallback.EOnClickActions.ClosePopup), (int) (width * 0.7)),
+                        (new EmptySpace(), (int) (width * shapesPerRow * 0.45))
+                    }));
+
+                chiselMenu.Items.Add(new EmptySpace(30));
 
                 for (int i = 0; i < ShapeManager.shapeName.Count / shapesPerRow; i++)
                 {
@@ -137,22 +165,6 @@ namespace Chisel
                     chiselMenu.Items.Add(new EmptySpace(30));
                 }
 
-                /*
-                if (ShapeManager.shapeName.Count % shapesPerRow > 0)
-                {
-                    chiselMenu.Items.Add(new Label("Adding: " + ShapeManager.shapeName.Count % 3));
-
-                    List<(IItem, int)> row = new List<(IItem, int)>();
-
-                    for (int i = ShapeManager.shapeName.Count % shapesPerRow; i > 0; i--)
-                    {
-                        row[i] = (new ButtonCallback("Khanx.Chisel." + (ShapeManager.shapeName.Count - i), new LabelData(ShapeManager.shapeName[(ShapeManager.shapeName.Count - i)].Substring(1)), -1, 30, ButtonCallback.EOnClickActions.ClosePopup), width);
-                    }
-
-                    chiselMenu.Items.Add(new HorizontalRow(row));
-                }
-                */
-
                 NetworkMenuManager.SendServerPopup(player, chiselMenu);
             }
         }
@@ -167,10 +179,20 @@ namespace Chisel
                 int shape = int.Parse(data.ButtonIdentifier.Substring(data.ButtonIdentifier.LastIndexOf(".") + 1));
 
                 selectedShape.Add(data.Player.ID, shape);
+
+                if(shape == -1)
+                {
+                    colonyserver.Assets.UIGeneration.UIManager.RemoveUIImage("Khanx.Shape", data.Player);
+                }
+                else
+                {
+                    colonyserver.Assets.UIGeneration.UIManager.AddorUpdateUIImage("Khanx.Shape", colonyshared.NetworkUI.UIGeneration.UIElementDisplayType.Colony,
+                    ShapeManager.baseName + ShapeManager.shapeName[shape], new Vector3Int(100, 100, 0), colonyshared.NetworkUI.AnchorPresets.BottomLeft, data.Player);
+                }
             }
         }
 
-        private static string getBestRotation(Vector3Int voxelHit)
+        public static string getBestRotation(Vector3Int voxelHit)
         {
             bool forward = World.TryGetTypeAt(voxelHit + Vector3Int.forward, out ushort type) && type != BlockTypes.BuiltinBlocks.Indices.air;
             bool back = World.TryGetTypeAt(voxelHit + Vector3Int.back, out type) && type != BlockTypes.BuiltinBlocks.Indices.air;

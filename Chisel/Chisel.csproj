@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChiselType.cs" />
+    <Compile Include="PlaceShape.cs" />
     <Compile Include="ShapeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
