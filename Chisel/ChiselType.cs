@@ -8,12 +8,12 @@ using NetworkUI;
 using NetworkUI.Items;
 
 using static Shared.PlayerClickedData;
-
+using System.Linq;
 
 namespace Chisel
 {
     [ModLoader.ModManager]
-    public class ChiselType : IOnPlayerClicked, IOnPlayerPushedNetworkUIButton
+    public class ChiselType : IOnPlayerClicked, IOnPlayerPushedNetworkUIButton, IAfterItemTypesDefined, IOnTryChangeBlock
     {
         public static Dictionary<Players.PlayerID, int> selectedShape = new Dictionary<Players.PlayerID, int>();
 
@@ -240,6 +240,29 @@ namespace Chisel
                 return "x+";
 
             return "x+";
+        }
+
+        HashSet<ItemTypes.ItemType> types;
+
+        public void AfterItemTypesDefined()
+        {
+            types = ShapeManager.typeWithShapes.ConvertAll(y => ItemTypes.GetType(y)).ToHashSet();
+        }
+
+        public void OnTryChangeBlock(ModLoader.OnTryChangeBlockData data)
+        {
+            if (data.CallbackConsumedResult != EServerChangeBlockResult.None) { return; }
+            if (data.CallbackOrigin != ModLoader.OnTryChangeBlockData.ECallbackOrigin.ClientPlayerManual) { return; }
+            if (data.RequestOrigin.Type != BlockChangeRequestOrigin.EType.Player) { return; }
+            if (data.TypeOld != BlockTypes.BuiltinBlocks.Types.air) { return; }
+            if (!types.Contains(data.TypeNew)) { return; }
+
+            Players.Player player = data.RequestOrigin.AsPlayer;
+            
+            if (!selectedShape.ContainsKey(player.ID) || selectedShape[player.ID] == -1) { return; }
+            
+            ItemTypes.ItemType nextNewType = ItemTypes.GetType(data.TypeNew.Name + ShapeManager.shapeName[ChiselType.selectedShape[player.ID]] + ChiselType.getBestRotation(data.Position));
+            data.TypeNew = nextNewType;
         }
     }
 }

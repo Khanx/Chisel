@@ -94,6 +94,9 @@ namespace Chisel
                     BlockRotator.CreateAndRegisterRotatedBlocks(types, shape, null, null, null, null, null, null, null);
                 }
             }
+
+            Log.Write("<color=blue>Total shapes generated: " + typeWithShapes.Count + "x" + shapeName.Count + "=" + typeWithShapes.Count* shapeName.Count + "</color>");
+
         }
     }
 }
