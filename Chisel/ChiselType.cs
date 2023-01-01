@@ -140,27 +140,31 @@ namespace Chisel
 
                 chiselMenu.Items.Add(new EmptySpace(30));
 
-                for (int i = 0; i < ShapeManager.shapeName.Count / shapesPerRow; i++)
+                for (int i = 0; i < Math.CeilToInt(ShapeManager.shapeName.Count / (float)shapesPerRow); i++)
                 {
-                    chiselMenu.Items.Add(new HorizontalRow(new List<(IItem, int)>
-                    {
-                        (new EmptySpace(), (int) (width * 0.3)),
-                        (new ItemIcon(ShapeManager.baseName + ShapeManager.shapeName[i * shapesPerRow]){ ShowTooltip = false}, (int) (width * 0.7)),
-                        (new EmptySpace(), (int) (width * 0.3)),
-                        (new ItemIcon(ShapeManager.baseName + ShapeManager.shapeName[i * shapesPerRow + 1]){ ShowTooltip = false}, (int) (width * 0.7)),
-                        (new EmptySpace(), (int) (width * 0.3)),
-                        (new ItemIcon(ShapeManager.baseName + ShapeManager.shapeName[i * shapesPerRow + 2]){ ShowTooltip = false}, (int) (width * 0.7)),
-                        (new EmptySpace(), (int) (width * 0.3)),
-                        (new ItemIcon(ShapeManager.baseName + ShapeManager.shapeName[i * shapesPerRow + 3]){ ShowTooltip = false}, (int) (width * 0.7))
-                    }));
+                    List<(IItem, int)> iconList = new List<(IItem, int)>();
+                    List<(IItem, int)> buttonList = new List<(IItem, int)>();
 
-                    chiselMenu.Items.Add(new HorizontalRow(new List<(IItem, int)>
+                    for (int j = 0; j < shapesPerRow; j++)
                     {
-                        (new ButtonCallback("Khanx.Chisel." + (i * shapesPerRow), new LabelData(ShapeManager.shapeName[i * shapesPerRow].Substring(1)), -1, 30, ButtonCallback.EOnClickActions.ClosePopup), width),
-                        (new ButtonCallback("Khanx.Chisel." + (i * shapesPerRow + 1), new LabelData(ShapeManager.shapeName[i * shapesPerRow + 1].Substring(1)), -1, 30, ButtonCallback.EOnClickActions.ClosePopup) , width),
-                        (new ButtonCallback("Khanx.Chisel." + (i * shapesPerRow + 2), new LabelData(ShapeManager.shapeName[i * shapesPerRow + 2].Substring(1)), -1, 30, ButtonCallback.EOnClickActions.ClosePopup), width),
-                        (new ButtonCallback("Khanx.Chisel." + (i * shapesPerRow + 3), new LabelData(ShapeManager.shapeName[i * shapesPerRow + 3].Substring(1)), -1, 30, ButtonCallback.EOnClickActions.ClosePopup), width)
-                    }));
+                        if(i * shapesPerRow + j < ShapeManager.shapeName.Count)
+                        {
+                            iconList.Add((new EmptySpace(), (int)(width * 0.3)));
+                            iconList.Add((new ItemIcon(ShapeManager.baseName + ShapeManager.shapeName[i * shapesPerRow + j]) { ShowTooltip = false }, (int)(width * 0.7)));
+
+                            buttonList.Add((new ButtonCallback("Khanx.Chisel." + (i * shapesPerRow + j), new LabelData(ShapeManager.shapeName[i * shapesPerRow + j].Substring(1)), -1, 30, ButtonCallback.EOnClickActions.ClosePopup), width));
+                        }
+                        else
+                        {
+                            iconList.Add((new EmptySpace(), (int)(width * 0.3)));
+                            iconList.Add((new EmptySpace(), (int)(width * 0.7)));
+
+                            //buttonList.Add((new EmptySpace(), width));
+                        }
+                    }
+
+                    chiselMenu.Items.Add(new HorizontalRow(iconList));
+                    chiselMenu.Items.Add(new HorizontalRow(buttonList));
 
                     chiselMenu.Items.Add(new EmptySpace(30));
                 }
