@@ -69,6 +69,7 @@ namespace Chisel
 
             foreach (var baseType in blocksToAddShapes)
             {
+                //Log.Write(baseType.name);
 
                 foreach (var name in shapeName)
                 {
@@ -95,7 +96,8 @@ namespace Chisel
                 }
             }
 
-            Log.Write("<color=blue>Total shapes generated: " + typeWithShapes.Count + "x" + shapeName.Count + "=" + typeWithShapes.Count* shapeName.Count + "</color>");
+            //Types x Shapes x Rotations; There are 5 rotations because it uses a parent
+            Log.Write("<color=blue>Total shapes generated: " + typeWithShapes.Count + "x" + shapeName.Count + "x5" + "=" + typeWithShapes.Count * shapeName.Count * 5 + "</color>");
 
         }
     }
