@@ -83,6 +83,7 @@ namespace Chisel
                     shape.description.SetAs("colliders", shapeType.description["colliders"]);
                     shape.description.SetAs("canBuildUpon", shapeType.description["canBuildUpon"]);
                     shape.description.SetAs("customData", shapeType.description["customData"]);
+                    shape.description.SetAs("lightingTransparency", 150);   //Removes shadows
 
 
                     //if (UnityEngine.Color.white != baseType.Color)
