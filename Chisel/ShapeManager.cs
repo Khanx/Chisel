@@ -39,6 +39,9 @@ namespace Chisel
             ".2Stairs",
             ".2StairsCorner",
             ".2StairsSpinner",
+            ".2StairsInverted",
+            ".2StairsCornerInverted",
+            ".2StairsSpinnerInverted",
             //".4Stairs",
             //".4StairsCorner",
             //".4StairsSpinner"

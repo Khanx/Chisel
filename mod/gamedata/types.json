@@ -7,6 +7,18 @@
 		"isPlaceable": false,
 		"icon" : "./textures/icons/chisel.png"
 	},
+	"Khanx.Kings.Shape.Cube" : {
+		"icon" : "./textures/icons/blocks/Cube.png",
+		"customData" : {
+				"useHeightMap" : true,
+				"useNormalMap" : true
+			},	
+		"blocksPathing" : true,
+		"isSolid" : true,
+		"collidePlayer" : true,
+		"canBuildUpon": true,
+		"sideall" : "planks"
+	},
 	"Khanx.Kings.Shape.CurveHorizontal" : {
 		"icon" : "./textures/icons/blocks/CurveHorizontal.png",
 		"mesh" : "./meshes/curve.ply",
@@ -466,6 +478,60 @@
 				{"min":[-0.5, 0.0, 0.0],"max":[0.5, 0.5, 0.5]},
 				{"min":[0.0, 0.0, -0.5],"max":[0.5, 0.5, 0.5]}
 			],
+		"blocksPathing" : true,
+		"isSolid" : true,
+		"collidePlayer" : true,
+		"canBuildUpon": true,
+		"sideall" : "planks"
+	},
+	"Khanx.Kings.Shape.2StairsInverted" : {
+		"icon" : "./textures/icons/blocks/2StairsInverted.png",
+		"mesh" : "./meshes/2step.ply",
+		"meshRotationEuler" : {
+			"x" : 180,
+			"y" : 180,
+			"z" : 0
+			},
+		"customData" : {
+				"useHeightMap" : true,
+				"useNormalMap" : true
+			},
+		"blocksPathing" : true,
+		"isSolid" : true,
+		"collidePlayer" : true,
+		"canBuildUpon": true,
+		"sideall" : "planks"
+	},
+	"Khanx.Kings.Shape.2StairsCornerInverted" : {
+		"icon" : "./textures/icons/blocks/2StairsCornerInverted.png",
+		"mesh" : "./meshes/2stepcorner.ply",
+		"meshRotationEuler" : {
+			"x" : 180,
+			"y" : 90,
+			"z" : 0
+			},
+		"customData" : {
+				"useHeightMap" : true,
+				"useNormalMap" : true
+			},
+		"blocksPathing" : true,
+		"isSolid" : true,
+		"collidePlayer" : true,
+		"canBuildUpon": true,
+		"sideall" : "planks"
+	},
+	"Khanx.Kings.Shape.2StairsSpinnerInverted" : {
+		"icon" : "./textures/icons/blocks/2StairsSpinnerInverted.png",
+		"mesh" : "./meshes/2stepinnercorner.ply",
+		"meshRotationEuler" : {
+			"x" : 180,
+			"y" : 90,
+			"z" : 0
+			},
+		"customData" : {
+				"useHeightMap" : true,
+				"useNormalMap" : true
+			},
 		"blocksPathing" : true,
 		"isSolid" : true,
 		"collidePlayer" : true,
