@@ -538,6 +538,29 @@
 		"canBuildUpon": true,
 		"sideall" : "planks"
 	},
+	"Khanx.Kings.Shape.2StairsRotated" : {
+		"icon" : "./textures/icons/blocks/2StairsRotated.png",
+		"mesh" : "./meshes/2step.ply",
+		"meshRotationEuler" : {
+			"x" : 90,
+			"y" : 180,
+			"z" : 0
+			},
+		"customData" : {
+				"useHeightMap" : true,
+				"useNormalMap" : true
+			},
+		
+		"colliders" :  [
+				{"min":[-0.5, -0.5, -0.5],"max":[0.5, 0.0, 0.5]},
+				{"min":[0.0, 0.0, -0.5],"max":[0.5, 0.5, 0.5]}
+			],
+		"blocksPathing" : true,
+		"isSolid" : true,
+		"collidePlayer" : true,
+		"canBuildUpon": true,
+		"sideall" : "planks"
+	},
 	"Khanx.Kings.Shape.4Stairs" : {
 		"icon" : "./textures/icons/blocks/4Stairs.png",
 		"mesh" : "./meshes/4step.ply",
