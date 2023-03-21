@@ -13,7 +13,7 @@ using System.Linq;
 namespace Chisel
 {
     [ModLoader.ModManager]
-    public class ChiselType : IOnPlayerClicked, IOnPlayerPushedNetworkUIButton, IAfterItemTypesDefined, IOnTryChangeBlock
+    public class ChiselType : IOnPlayerClicked, IOnPlayerPushedNetworkUIButton, IAfterItemTypesDefined, IOnTryChangeBlock, IOnPlayerDeath, IOnPlayerDisconnected
     {
         public static Dictionary<Players.PlayerID, int> selectedShape = new Dictionary<Players.PlayerID, int>();
 
@@ -267,6 +267,16 @@ namespace Chisel
             
             ItemTypes.ItemType nextNewType = ItemTypes.GetType(data.TypeNew.Name + ShapeManager.shapeName[ChiselType.selectedShape[player.ID]] + ChiselType.getBestRotation(data.Position));
             data.TypeNew = nextNewType;
+        }
+
+        public void OnPlayerDeath(Players.Player player)
+        {
+            selectedShape.Remove(player.ID);
+        }
+
+        public void OnPlayerDisconnected(Players.Player player)
+        {
+            selectedShape.Remove(player.ID);
         }
     }
 }
