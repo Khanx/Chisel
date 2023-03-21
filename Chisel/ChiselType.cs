@@ -191,7 +191,7 @@ namespace Chisel
                 else
                 {
                     colonyserver.Assets.UIGeneration.UIManager.AddorUpdateUIImage("Khanx.Shape", colonyshared.NetworkUI.UIGeneration.UIElementDisplayType.Colony,
-                    ShapeManager.baseName + ShapeManager.shapeName[shape], new Vector3Int(100, 100, 0), colonyshared.NetworkUI.AnchorPresets.BottomLeft, data.Player);
+                    ShapeManager.baseName + ShapeManager.shapeName[shape], new Vector3Int(-335, 150, 0), colonyshared.NetworkUI.AnchorPresets.BottonCenter, data.Player);
                 }
             }
         }
@@ -272,11 +272,13 @@ namespace Chisel
         public void OnPlayerDeath(Players.Player player)
         {
             selectedShape.Remove(player.ID);
+            colonyserver.Assets.UIGeneration.UIManager.RemoveUIImage("Khanx.Shape", player);
         }
 
         public void OnPlayerDisconnected(Players.Player player)
         {
             selectedShape.Remove(player.ID);
+            //Markers are automatically removed when the player disconnects 
         }
     }
 }

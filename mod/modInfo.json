@@ -1,7 +1,7 @@
 [
 	{
 		"name": "Chisel",
-		"version": "0.1.1.0",
+		"version": "0.1.1.2",
 		"description" : "The player will select the shape of the block to place.",
 		"enableddefault" : true,
 		"dllpath": "Chisel.dll",
